@@ -5,8 +5,10 @@
 #include "SDL.h"
 #include "stdio.h"
 
-const int WIDTH     = 1920;
-const int HEIGHT    = 1080;
+
+
+const int WIDTH = 800;
+const int HEIGHT = 600;
 
 SDL_Window*     mainWindow          = NULL;
 SDL_Surface*    mainWindowCanvas    = NULL;
@@ -26,8 +28,8 @@ bool Init()
     }
     else
     {
-        mainWindow = SDL_CreateWindow("MY FIRST SDL WINDOW", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                      WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
+        mainWindow = SDL_CreateWindow("MY FIRST SDL WINDOW", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                                      WIDTH, HEIGHT, SDL_WINDOW_BORDERLESS);
         if (mainWindow == NULL)
         {
             printf("Failed to Create Window - SDL_ERROR: %s\n", SDL_GetError());
@@ -44,7 +46,7 @@ bool LoadMedia()
 {
     bool success = true;
 
-    backgroundImage = SDL_LoadBMP("IMAGES/HELLO.gif");
+    backgroundImage = SDL_LoadBMP("IMAGES/HELLO.bmp");
     if (backgroundImage == NULL)
     {
         printf("Failed to Load Image - SDL_ERROR: %s\n", SDL_GetError());
@@ -79,6 +81,7 @@ int main(int argc, char* args[])
         else
         {
             SDL_BlitSurface(backgroundImage, NULL, mainWindowCanvas, NULL);
+            SDL_UpdateWindowSurface(mainWindow);
             SDL_Delay(5000);
         }
     }
